@@ -1,3 +1,5 @@
+// O(n) time and O(N) space
+
 function getDifferentNumber(arr) {
   let n = arr.length;
   // store the integers in Array
@@ -16,6 +18,10 @@ function getDifferentNumber(arr) {
   }
   return n;
 };
+
+// can use set
+// if allowed to modify arr, then in-place can be O(N) time and O(1) space
+
 
 // TEST
 let desc = 'Array of 0';
