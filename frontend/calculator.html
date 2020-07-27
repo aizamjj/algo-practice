@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Calculator</title>
+    <style>
+
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="input">
+        <input>
+      </div>
+    </div>
+    <script>
+      // Define the operators 
+      var operations = {
+        "/": function(a, b) {return a / b;},
+        "x": function(a, b) {return a * b;},
+        "-": function(a, b) {return a - b;},
+        "+": function(a, b) {return parseFloat(a) + parseFloat(b);},
+      }
+
+      var operatorChars = Object.keys(operations);
+      
+    </script>
+  </body>
+</html>
