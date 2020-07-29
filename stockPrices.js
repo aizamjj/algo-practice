@@ -1,7 +1,7 @@
 // input: array of stock prices
 // output: profit - number
 // constraints: no shorting -must purchase first, cannot purchase and sell in the same time step
-
+// O(n) time and O(1) space
 const getMaxProfit = (stockPrices) => {
   if (stockPrices.length < 2) {
     throw new Error('Getting a profit requires at least 2 prices');
