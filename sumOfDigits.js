@@ -14,7 +14,7 @@ const findSumRecursively = (integer) => {
     sum += Math.floor(integer % 10);
     integer = integer / 10;
   }
-  return findSum(sum);
+  return findSumRecursively(sum);
 };
 
 
