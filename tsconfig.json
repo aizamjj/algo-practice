@@ -1,0 +1,12 @@
+{
+    "compilerOptions": {
+        "preserveConstEnums": true,
+        "target": "es6",
+        "lib": [
+            "es2018",
+            "dom",
+            "dom.iterable",
+            "scripthost",
+        ],
+    },
+}
