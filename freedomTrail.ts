@@ -1,6 +1,7 @@
 function mod(x, m) {
-  return (x%m + m)%m;
+  return (x % m + m) % m;
 }
+console.log(mod(2, 5))
 
 function fill(n, s) {
   let array = [];
@@ -8,45 +9,47 @@ function fill(n, s) {
     array.push(s)
     n--;
   }
-  return array;
+  return array.concat('.');
 }
 
-function solve(ring: string, key: string, keyIndex: number=0, ringIndex: number=0): string[] {
+
+
+function solve(ring: string, key: string, keyIndex: number, ringIndex: number): string[] {
   
   if (keyIndex === key.length) {
     return []; 
   } 
   
-  let char: string = key[keyIndex];
-  
-  const leftRing = ring.slice(0, ringIndex + 1).split('').reverse(). join('') + ring.slice(ringIndex + 1).split('').reverse().join('')
-  const rightRing = ring.slice(ringIndex) + ring.slice(0, ringIndex)
+  let currChar: string = key[keyIndex];
+  let minPath = [];
+
+   const leftRing: string = ring.slice(0, ringIndex + 1).split('').reverse(). join('') + ring.slice(ringIndex + 1).split('').reverse().join('')
+  const rightRing: string = ring.slice(ringIndex) + ring.slice(0, ringIndex)
     
-  let rightIndex: number = rightRing.indexOf(char);
-  let leftIndex: number = leftRing.indexOf(char);
+  let rightIndex: number = rightRing.indexOf(currChar);
+  let leftIndex: number = leftRing.indexOf(currChar);
   
-  let lIndex = mod((ringIndex - leftIndex), ring.length);  
+  let lIndex: number = mod((ringIndex - leftIndex), ring.length);  
   let rIndex = mod((ringIndex + rightIndex), ring.length);
-  let leftPath = fill(lIndex, '<-').concat('.');
-  let rightPath = fill(rIndex, '->').concat('.');
-  leftPath = leftPath.concat(solve(ring, key, keyIndex + 1, leftIndex))
-  rightPath = rightPath.concat( 
-    solve(ring, key, keyIndex + 1, rightIndex))
-    console.log('right', rightPath, char, rIndex, rightIndex, rightRing);
-    console.log('left', leftPath, char, lIndex, leftIndex, leftRing)
+  let leftPath = fill(leftIndex, '<-').concat(currChar);
+  let rightPath = fill(rightIndex, '->').concat(currChar);
+  
+  leftPath = leftPath.concat(solve(ring, key, keyIndex + 1, rIndex))
+  rightPath = rightPath.concat(solve(ring, key, keyIndex + 1, rIndex))
+
   let min = leftPath.length < rightPath.length ? leftPath : rightPath;
-  // let minDistance = Math.min((leftPath.concat(
-  //   solve(ring, key, keyIndex + 1, leftIndex))).length, (rightPath.concat( 
-  //   solve(ring, key, keyIndex + 1, rightIndex)).length
-  // )
+
   return min;
 }
 
 // test
-// const result = solve('godding', 'gd', 0, 0);
-// console.log(solve('godding', 'godding', 0, 0))
-const result = solve('godding', 'dn', 0, 0);
-console.log(result)
+//console.log(solve('godding', 'gd', 0, 0))
+//console.log(solve('godding', 'oi', 0, 0))
+//console.log(solve('godding', 'godding', 0, 0))
+//console.log(solve('godding', 'dn', 0, 0))
+console.log(solve('godding', 'goddog', 0, 0))
+console.log(solve('baezushka', 'kbkae', 0, 0))
+
 
 // dn
 //        'd'
@@ -54,3 +57,19 @@ console.log(result)
 //      4     2 
 //   /   \   /  \
 //  4     2 4    3  n
+
+// gd
+//         'g'
+//        /   \
+//       0    0
+//     /  \  / \
+//    4   2  4  2
+
+// oi
+//       'o'
+//      /   \
+//     6    1
+//    / \   / \
+//   4  3  4    3
+
+// goddog
